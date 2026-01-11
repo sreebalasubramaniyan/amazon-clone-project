@@ -1,0 +1,159 @@
+body{
+    font-family:Arial ;
+}
+
+.header-part{
+    display : flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(19, 25, 33);
+    color: white;
+    position : fixed;
+    top : 0;
+    left : 0;
+    right : 0;
+    padding :2px  14px;
+    height: 60px;
+   
+}
+.logo-part{
+    width : 180px;
+}
+.logo-image{
+    width: 100px;
+     margin-top: 5px;
+    padding : 5px;
+    border-radius : 3px;
+    border : 1px solid rgb(19, 25, 33);
+}
+.amazon-mobile-logo {
+  display: none;
+}
+
+.logo-image:hover{
+    border-color : white;
+}
+@media (max-width: 800px) {
+  .logo-part{
+    width : unset;
+  }
+  .addto-cart-part{
+    width : unset;
+  }
+  
+}
+@media(max-width:600px){
+    .logo-image{
+        display : none;
+    }
+    .amazon-mobile-logo{
+        display : block;
+        width : 35px;
+        margin-top: 5px;
+    }
+    .addto-cart-part{
+        display : none;
+    }
+    .hamburger{
+        display : block;
+        width : 55px;
+    }
+    .right-part{
+        margin-left: auto;
+    }
+}
+
+.search-part{
+    flex : 1;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 850px;
+    margin-left: 10px;
+    margin-right: 10px;
+  
+}
+.input-box{
+    width : 0;
+    flex : 1;
+    display : flex;
+    font-size : 15px;
+    padding : 12px 5px;
+    padding-top : 12px;
+    border : none;
+}
+.search-button{
+    font-size: 15px;
+    padding : 9px 15px;
+    padding-top : 8px;
+    padding-bottom: 10px;
+    background-color: rgb(254, 189, 105);
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border : none
+}
+.search-button-image{
+    width : 20px;
+}
+.right-part{
+    display : flex;
+    align-items: center;
+}
+.hamburger{
+    display: none;
+}
+
+.addto-cart-part{
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+.return-link{
+    display : flex;
+    flex-direction: column;
+    margin-right : 10px;
+    padding : 5px;
+    border : 1px solid rgb(19, 25, 33);
+    border-radius : 3px;
+}
+.return-link:hover{
+    border-color : white;
+}
+.return-tex{
+    font-size: 13px;
+}
+.order-text{
+    font-size: 15px;
+    font-weight: 700;
+}
+.cart-link{
+
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding : 5px;
+    border : 1px solid rgb(19, 25, 33);
+    border-radius : 3px;
+}
+
+.cart-link:hover{
+    border-color : white;
+}
+.cart-image{
+    width : 50px;
+}
+.cart-text{
+    margin : 0;
+    margin-bottom :-10px;
+    font-weight: 700;
+}
+.cart-quantity{
+    color : rgb(240, 136, 4);
+    position: absolute;
+    top : 6px;
+    left : 32px;
+    font-size: 18px;
+}
+
