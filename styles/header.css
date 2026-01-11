@@ -1,6 +1,3 @@
-body{
-    font-family:Arial ;
-}
 
 .header-part{
     display : flex;
@@ -12,7 +9,7 @@ body{
     top : 0;
     left : 0;
     right : 0;
-    padding :2px  14px;
+    padding :1px  14px;
     height: 60px;
    
 }
@@ -51,16 +48,6 @@ body{
         width : 35px;
         margin-top: 5px;
     }
-    .addto-cart-part{
-        display : none;
-    }
-    .hamburger{
-        display : block;
-        width : 55px;
-    }
-    .right-part{
-        margin-left: auto;
-    }
 }
 
 .search-part{
@@ -78,9 +65,12 @@ body{
     flex : 1;
     display : flex;
     font-size : 15px;
-    padding : 12px 5px;
+    padding : 10px 10px;
     padding-top : 12px;
     border : none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    outline: 2px solid rgb(254, 189, 105);
 }
 .search-button{
     font-size: 15px;
@@ -120,7 +110,7 @@ body{
 .return-link:hover{
     border-color : white;
 }
-.return-tex{
+.return-text{
     font-size: 13px;
 }
 .order-text{
@@ -142,9 +132,10 @@ body{
     border-color : white;
 }
 .cart-image{
-    width : 50px;
+    width : 40px;
 }
 .cart-text{
+    font-size : 14px;
     margin : 0;
     margin-bottom :-10px;
     font-weight: 700;
@@ -152,8 +143,8 @@ body{
 .cart-quantity{
     color : rgb(240, 136, 4);
     position: absolute;
-    top : 6px;
-    left : 32px;
-    font-size: 18px;
+    top : 3px;
+    left : 24px;
+    font-size: 15px;
 }
 
