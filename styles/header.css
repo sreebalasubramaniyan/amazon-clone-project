@@ -132,19 +132,24 @@
     border-color : white;
 }
 .cart-image{
-    width : 40px;
+    width : 55px;
 }
 .cart-text{
-    font-size : 14px;
+    width : 14px;
     margin : 0;
     margin-bottom :-10px;
     font-weight: 700;
 }
 .cart-quantity{
-    color : rgb(240, 136, 4);
-    position: absolute;
-    top : 3px;
-    left : 24px;
-    font-size: 15px;
+    color: rgb(240, 136, 4);
+  font-size: 16px;
+  font-weight: 700;
+
+  position: absolute;
+  top: 4px;
+  left: 24px;
+  
+  width: 26px;
+  text-align: center;
 }
 

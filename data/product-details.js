@@ -1,3 +1,5 @@
+export const Cart = []; // it can be accessed from outside files
+// for export and import work we need to give type as module in script element
 const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -690,11 +692,11 @@ for(let product of products){
                 </select>
             </div>
             <div class="addto-cart-section">
-                <button class="addto-cart-button">Add to Cart</button>
+                <button data-product-name = "${product.name}" class="addto-cart-button js-addto-button">Add to Cart</button>
             </div>
         </div>
 `)
 }
-console.log(product_html)
+// console.log(product_html)
 const grid = document.querySelector(".grid");
 grid.innerHTML = product_html;
