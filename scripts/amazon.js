@@ -18,16 +18,23 @@ for(let product of products){
                 <div class="rating-number">${product.rating.count}</div>
             </div>
             <div class="price">$${product.priceCents.toFixed(2)}</div>
-            <div class="quantity-d
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
+            <div class="quantity">
+                <select>
+                <option selected value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
                 </select>
+            </div>
+
+            <div class="added-showing-part">
+                
             </div>
             <div class="addto-cart-section">
                 <button data-product-name = "${product.name}"data-product-id="${product.id}" class="addto-cart-button js-addto-button">Add to Cart</button>
@@ -41,6 +48,8 @@ grid.innerHTML = product_html;
 
 // cart function
 function addToCart(button){
+    const Parent = button.parentElement.parentElement;
+
     let PId = button.dataset.productId
         let found = false;
         let found_obj = null;
@@ -59,9 +68,20 @@ function addToCart(button){
                 quantity : 1
             })
         }
+        // find out the quantity
         const cart_quantity = document.querySelector(".cart-quantity");
         let old = Number(cart_quantity.innerText);
-        cart_quantity.innerText = old+1;
+        const selected_val = Parent.querySelector(".quantity").firstElementChild.value;
+        console.log(selected_val)
+        cart_quantity.innerText = old + Number(selected_val);
+        
+        // showing the added element
+        const added_show = Parent.querySelector(".added-showing-part");
+        setTimeout(() => {
+            added_show.innerHTML = ``;
+        },2000);
+        added_show.innerHTML = `<img src="https://supersimple.dev/projects/amazon/images/icons/checkmark.png"> Added`;
+
 }
 const add_to_cart_buttons = document.querySelectorAll(".js-addto-button");
 add_to_cart_buttons.forEach((button)=>{
@@ -73,6 +93,5 @@ add_to_cart_buttons.forEach((button)=>{
             inside js : productName
         */
        addToCart(button);
-       console.log(Cart);
     })
 })
