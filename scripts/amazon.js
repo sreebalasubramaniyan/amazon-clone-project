@@ -95,3 +95,60 @@ add_to_cart_buttons.forEach((button)=>{
        addToCart(button);
     })
 })
+
+// searching the products and showing
+function match(input_text){
+    let list_of_products = "";
+    let input_arr = input_text.toLowerCase().split(" ");
+    products.forEach((product)=>{
+        let product_name_arr = product.name.toLowerCase();
+        let inter_section = input_arr.filter(element => product_name_arr.includes(element) && element.length > 1);
+        if(inter_section.length >= 1) list_of_products += `<div class="container"> 
+            <div class="image-section">
+                <img src="${product.image}" alt="" class="product-image">
+            </div>
+            <div class="details-section limit-text-to-2-lines">
+                ${product.name}
+            </div>
+            <div class="rating-section">
+                <img src="https://supersimple.dev/projects/amazon/images/ratings/rating-${miss(product.rating.stars*10)}.png" alt="" class="rating-image">
+                <div class="rating-number">${product.rating.count}</div>
+            </div>
+            <div class="price">$${product.priceCents.toFixed(2)}</div>
+            <div class="quantity">
+                <select>
+                <option selected value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                </select>
+            </div>
+
+            <div class="added-showing-part">
+                
+            </div>
+            <div class="addto-cart-section">
+                <button data-product-name = "${product.name}"data-product-id="${product.id}" class="addto-cart-button js-addto-button">Add to Cart</button>
+            </div>
+        </div>
+`;
+    })
+    return list_of_products;
+}
+const search_button = document.querySelector(".search-button")
+search_button.addEventListener("click",()=>{
+    const input_val = document.querySelector(".input-box").value.toLowerCase();
+    if(input_val==="") return;
+    let temp = match(input_val);
+    let html; 
+    if(temp === "") html = "No products matched your search.";
+    else html = temp;
+    grid.innerHTML = html;
+
+})
