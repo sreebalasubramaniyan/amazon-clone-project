@@ -11,7 +11,7 @@
 <body>
     <header class="header-part">
         <div class="logo-part">
-            <a class="logo-link">
+            <a class="logo-link" href="amazon.html">
                 <img class="logo-image"src="images/amazon-logo-white.png">
                 <img class="amazon-mobile-logo" src="images/amazon-mobile-logo-white.png">
             </a>
@@ -28,7 +28,7 @@
                     <span class="return-text">Return</span>
                     <span class="order-text">&Orders</span>
                 </a>
-                <a class="cart-link">
+                <a class="cart-link" href="checkout.html">
                     <img class="cart-image"src="images/icons/cart-icon.png" alt="">
                     <div class="cart-text">Cart</div>
                     <div class="cart-quantity">0</div>
@@ -41,9 +41,10 @@
     <main>
         <div class="grid"></div>
     </main>
-
-    <script type="module" src="data/product-details.js">
+    <!--module this is a entry point for all other js files-->
+    <script type="module" src="scripts/amazon.js">
     </script>
-    <script type = "module" src="data/cart-details.js"></script>
+    
+    
 </body>
 </html>

@@ -1,0 +1,39 @@
+.checkout-header{
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+    height : 60px;
+    background-color: aqua;
+
+    position : fixed;
+    top : 0;
+    left : 0;
+    right : 0;
+    padding : 0px 30px;
+}
+.left-part{
+    width : 180px;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+}
+.left-part img{
+    width : 60%;
+}
+.middle-part{
+    flex : 1;
+    display : flex;
+    align-items: center;
+    justify-content: center;
+}
+.checkout-text{
+    font-size: 24px;
+    font-weight: 700;
+}
+.right-part{
+    width : 180px;
+    display : flex;
+    align-items: center;
+    justify-content: end;
+    padding-right : 20px;
+}

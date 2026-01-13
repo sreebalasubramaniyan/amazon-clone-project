@@ -16,20 +16,24 @@
 .logo-part{
     width : 180px;
 }
-.logo-image{
-    width: 100px;
-     margin-top: 5px;
-    padding : 5px;
+.logo-link{
+    display : inline-block;
+    padding : 6px;
     border-radius : 3px;
     border : 1px solid rgb(19, 25, 33);
+    text-decoration: none;
+}
+.logo-link:hover{
+    border-color : white;
+}
+.logo-image{
+    width : 100px;
+    margin-top: 5px;
 }
 .amazon-mobile-logo {
   display: none;
 }
 
-.logo-image:hover{
-    border-color : white;
-}
 @media (max-width: 800px) {
   .logo-part{
     width : unset;
@@ -92,17 +96,22 @@
 .hamburger{
     display: none;
 }
+.addto-cart-part{
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width : 180px;
+}
 
 .addto-cart-part{
     display : flex;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
 }
 .return-link{
     display : flex;
     flex-direction: column;
-    margin-right : 10px;
     padding : 5px;
     border : 1px solid rgb(19, 25, 33);
     border-radius : 3px;
@@ -118,38 +127,40 @@
     font-weight: 700;
 }
 .cart-link{
-
+    text-align: center;
     display : flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    padding : 5px;
-    border : 1px solid rgb(19, 25, 33);
+    padding: 5px 0px;
     border-radius : 3px;
+    border : 1px solid rgb(19, 25, 33);
+    width : 90px;
+    text-decoration: none;
+    color : white;
 }
 
 .cart-link:hover{
     border-color : white;
 }
 .cart-image{
-    width : 55px;
+    width : 50px;
+    margin: 0;
 }
 .cart-text{
-    width : 14px;
+    text-decoration: none;
+    color : white;
     margin : 0;
     margin-bottom :-10px;
     font-weight: 700;
 }
 .cart-quantity{
-    color: rgb(240, 136, 4);
-  font-size: 16px;
+  color: rgb(240, 136, 4);
   font-weight: 700;
-
   position: absolute;
+  width : 26px;
   top: 4px;
-  left: 24px;
-  
-  width: 26px;
+  left: 22px;
   text-align: center;
 }
 

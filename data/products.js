@@ -1,6 +1,4 @@
-export const Cart = []; // it can be accessed from outside files
-// for export and import work we need to give type as module in script element
-const products = [
+export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -660,43 +658,3 @@ const products = [
     ]
   }
 ];
-const miss = (x)=>{if(x==40 || 50) return 45;
-    else return x;
-}
-let product_html = ''
-for(let product of products){
-    product_html += (`<div class="container"> 
-            <div class="image-section">
-                <img src="${product.image}" alt="" class="product-image">
-            </div>
-            <div class="details-section limit-text-to-2-lines">
-                ${product.name}
-            </div>
-            <div class="rating-section">
-                <img src="https://supersimple.dev/projects/amazon/images/ratings/rating-${miss(product.rating.stars*10)}.png" alt="" class="rating-image">
-                <div class="rating-number">${product.rating.count}</div>
-            </div>
-            <div class="price">$${product.priceCents.toFixed(2)}</div>
-            <div class="quantity-section">
-                <select  class="quantity">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                </select>
-            </div>
-            <div class="addto-cart-section">
-                <button data-product-name = "${product.name}" class="addto-cart-button js-addto-button">Add to Cart</button>
-            </div>
-        </div>
-`)
-}
-// console.log(product_html)
-const grid = document.querySelector(".grid");
-grid.innerHTML = product_html;
