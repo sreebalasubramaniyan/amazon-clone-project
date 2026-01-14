@@ -152,3 +152,14 @@ search_button.addEventListener("click",()=>{
     grid.innerHTML = html;
 
 })
+// trigeer the search when the enter key is pressed
+const input_val = document.querySelector(".input-box");
+input_val.addEventListener("keydown",(event)=>{
+    if(event.key === "Enter"){
+        // Cancel the default action, if it is a form submission
+        event.preventDefault();
+        // Trigger the button element with a click
+        search_button.click();
+    }
+})
+
