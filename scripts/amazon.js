@@ -93,7 +93,7 @@ add_to_cart_buttons.forEach((button)=>{
             inside js : productName
         */
        addToCart(button);
-       pushTOCart(button);
+       
     })
 })
 

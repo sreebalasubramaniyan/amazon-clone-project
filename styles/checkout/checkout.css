@@ -19,6 +19,8 @@
     /*using for stretching vertically*/
     align-items: start;
 }
+
+
 @media(max-width:1000px){
     .main{
         max-width: 500px;
@@ -87,6 +89,7 @@
     padding : 20px;
     border-radius: 8px;
     margin-bottom: 20px;
+    grid-column: 1;
 }
 .delivery_date{
     font-size: 20px;
@@ -206,4 +209,16 @@
 .option .type{
     flex-shrink: 0;
     color : rgb(120, 120, 120);
+}
+.empty-button{
+    font-size: 15px;
+    padding : 8px 10px;
+    border : none;
+    border-radius: 5px;
+    background-color: rgb(255, 216, 20);
+    margin-top: 10px;
+    cursor: pointer;
+}
+.empty-button:hover{
+    opacity: 0.85;
 }
