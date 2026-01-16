@@ -4,6 +4,15 @@ import {Cart, saveCart} from '../data/cart.js'
 const miss = (x)=>{if(x==40 || 50) return 45;
     else return x;
 }
+
+function renderCartLogo(){
+    let total_products = 0;
+    for(let p of Cart) total_products += p.quantity;
+    document.querySelector(".cart-quantity").innerText = total_products;
+}
+renderCartLogo();
+
+// renderMain Grid
 let product_html = ''
 for(let product of products){
     product_html += (`<div class="container"> 
@@ -17,7 +26,7 @@ for(let product of products){
                 <img src="https://supersimple.dev/projects/amazon/images/ratings/rating-${miss(product.rating.stars*10)}.png" alt="" class="rating-image">
                 <div class="rating-number">${product.rating.count}</div>
             </div>
-            <div class="price">$${product.priceCents.toFixed(2)}</div>
+            <div class="price">$${(product.priceCents/100).toFixed(2)}</div>
             <div class="quantity">
                 <select>
                 <option selected value="1">1</option>
@@ -42,11 +51,10 @@ for(let product of products){
         </div>
 `)
 }
-// console.log(product_html)
 const grid = document.querySelector(".grid");
 grid.innerHTML = product_html;
 
-// cart function
+
 function addToCart(button){
     const Parent = button.parentElement.parentElement;
     let PId = button.dataset.productId
@@ -69,12 +77,7 @@ function addToCart(button){
             })
         }
         // find out the quantity
-        const cart_quantity = document.querySelector(".cart-quantity");
-        let old = Number(cart_quantity.innerText);
-        const selected_val = Parent.querySelector(".quantity").firstElementChild.value;
-        console.log(selected_val)
-        cart_quantity.innerText = old + Number(selected_val);
-        
+        renderCartLogo();
         // showing the added element
         const added_show = Parent.querySelector(".added-showing-part");
         setTimeout(() => {
@@ -83,21 +86,20 @@ function addToCart(button){
         added_show.innerHTML = `<img src="https://supersimple.dev/projects/amazon/images/icons/checkmark.png"> Added`;
         saveCart();
 }
+
 const add_to_cart_buttons = document.querySelectorAll(".js-addto-button");
 add_to_cart_buttons.forEach((button)=>{
-    button.addEventListener("click",()=>{
+button.addEventListener("click",()=>{
         /* adding a data-"your text" attribute to the button we can acces the dataset from js
             dataset tells the all the data-"" attribute that have been added in the button element
 
             inside element : data-product-name
             inside js : productName
         */
-       addToCart(button);
-       
+       addToCart(button); 
     })
 })
 
-// searching the products and showing
 function match(input_text){
     let list_of_products = "";
     let input_arr = input_text.toLowerCase().split(" ");
@@ -142,6 +144,7 @@ function match(input_text){
     })
     return list_of_products;
 }
+
 const search_button = document.querySelector(".search-button")
 search_button.addEventListener("click",()=>{
     const input_val = document.querySelector(".input-box").value.toLowerCase();

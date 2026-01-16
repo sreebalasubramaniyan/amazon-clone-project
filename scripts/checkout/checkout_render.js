@@ -1,5 +1,6 @@
 import {Cart,saveCart} from "../../data/cart.js";
 import {products} from "../../data/products.js";
+import { calculatePaymentSummary } from "./checkout_calculate.js";
 const checkout_items = document.querySelector(".checkout-text");
 const order_summary = document.querySelector(".order-summary")
 const payment_summary = document.querySelector(".payment-summary");
@@ -7,14 +8,19 @@ const today = dayjs()
 const day1 = today.add(7,'day').format('dddd, MMMM D');
 const day2 = today.add(3,'day').format('dddd, MMMM D');
 const day3 = today.add(1,'day').format('dddd, MMMM D');
-
-const deliveryOption = [
+function renderCheckoutLogo(){
+    let total_products = 0;
+    for(let p of Cart) total_products += p.quantity;
+    document.querySelector(".checkout-number").innerText = total_products + " items";
+}
+renderCheckoutLogo();
+export const deliveryOption = [
     {date:day1,cost:0},
     {date:day2,cost:4.99},
     {date:day3,cost:9.99}
 ]
 console.log(dayjs())
-function findProduct(id){
+export function findProduct(id){
     let res;
     for(let p of products){
         if(p.id===id)
@@ -124,8 +130,10 @@ function renderOrderSummary(){
     order_summary.innerHTML = order_summary_html;
 }
 renderOrderSummary();
+calculatePaymentSummary();
 
-document.querySelector(".order-summary").addEventListener("change",(e)=>{
+// for live change of delivery date on the top of ordersummary
+function changeDeliveryDate(e){
     let id = (e.target.id);
     let value = Number(e.target.value)
     let found = findProductCart(id);
@@ -134,6 +142,10 @@ document.querySelector(".order-summary").addEventListener("change",(e)=>{
     console.log(document.getElementById(`${id}`))
     document.getElementById(`${id}`).querySelector(".delivery_date").innerText = "Delivery date: "+date;
     console.log(Cart)
+}
+document.querySelector(".order-summary").addEventListener("change",(e)=>{
+    changeDeliveryDate(e);
+    calculatePaymentSummary();
 })
 
 function removeFromCart(e){
@@ -148,7 +160,9 @@ document.querySelector(".order-summary").addEventListener("click",(e)=>{
         if(e.target.className==="delete"){
             removeFromCart(e);
             saveCart();
-            renderOrderSummary()
+            renderOrderSummary();
+            renderCheckoutLogo();
+            calculatePaymentSummary();
         }
 
         else if(e.target.className==="update"){
