@@ -80,6 +80,11 @@
     border-radius: 8px;
     border : none;
     background-color: rgb(255, 216, 20);
+    cursor : pointer;
+    transition: all 0.3ms;
+}
+.payment-summary>button:hover{
+    opacity: 0.8;
 }
 
 .product-summary{
@@ -178,6 +183,7 @@
     cursor : pointer;
     padding : 0px;
     margin-left : -10px;
+
 }
 .q_u_b button:hover{
     color: rgb(177, 39, 4);

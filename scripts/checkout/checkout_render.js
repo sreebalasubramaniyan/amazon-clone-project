@@ -1,25 +1,21 @@
 import {Cart,saveCart} from "../../data/cart.js";
 import {products} from "../../data/products.js";
 import { calculatePaymentSummary } from "./checkout_calculate.js";
+
+import {day1,day2,day3,deliveryOption} from "../../data/delivery_date.js";
 const checkout_items = document.querySelector(".checkout-text");
 const order_summary = document.querySelector(".order-summary")
 const payment_summary = document.querySelector(".payment-summary");
-const today = dayjs()
-const day1 = today.add(7,'day').format('dddd, MMMM D');
-const day2 = today.add(3,'day').format('dddd, MMMM D');
-const day3 = today.add(1,'day').format('dddd, MMMM D');
 function renderCheckoutLogo(){
     let total_products = 0;
     for(let p of Cart) total_products += p.quantity;
-    document.querySelector(".checkout-number").innerText = total_products + " items";
+    if(document.querySelector(".checkout-number")){
+        document.querySelector(".checkout-number").innerText = total_products + " items";
+    }
 }
 renderCheckoutLogo();
-export const deliveryOption = [
-    {date:day1,cost:0},
-    {date:day2,cost:4.99},
-    {date:day3,cost:9.99}
-]
-console.log(dayjs())
+
+
 export function findProduct(id){
     let res;
     for(let p of products){
@@ -66,7 +62,9 @@ function renderPaymentSummary(){
 
                 <button class="place-order">Place your order</button>
             `
-payment_summary.innerHTML = payment_summary_html;
+if(payment_summary){
+    payment_summary.innerHTML = payment_summary_html;
+}
 }
 renderPaymentSummary();
 
@@ -127,7 +125,7 @@ function renderOrderSummary(){
         <a href="index.html"><button class="empty-button">view products</button></a>
         `
     }
-    order_summary.innerHTML = order_summary_html;
+    if(order_summary)order_summary.innerHTML = order_summary_html;
 }
 renderOrderSummary();
 calculatePaymentSummary();
@@ -170,3 +168,10 @@ document.querySelector(".order-summary").addEventListener("click",(e)=>{
         }
 })
 
+document.querySelector(".place-order").addEventListener("click",(e)=>{
+    if(Cart && Cart.length>0){
+        console.log(e)
+        window.location.href = "order.html";
+        
+    }
+})

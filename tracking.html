@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazon</title>
+<html>
+  <head>
+    <title>Tracking</title>
+
+    <!-- This code is needed for responsive design to work.
+      (Responsive design = make the website look good on
+      smaller screen sizes like a phone or a tablet). -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Load a font called Roboto from Google Fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Here are the CSS files for this page. -->
+    <link rel="stylesheet" href="styles/shared/general.css">
     <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/amazon-home-page.css">
-    <link rel="stylesheet" href="styles/general.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles/pages/tracking.css">
+  </head>
+  <body>
     <header class="header-part">
         <div class="logo-part">
             <a class="logo-link" href="index.html">
@@ -37,14 +47,9 @@
             <img class="hamburger" src="images/icons/hamburger-menu.png">
         </div>
     </header>
-    
-    <main>
-        <div class="grid"></div>
-    </main>
-    <!--module this is a entry point for all other js files-->
-    <script type="module" src="scripts/amazon.js">
-    </script>
-    
-    
-</body>
+
+    <div class="main">  
+    </div>
+    <script type="module" src="scripts/track.js"></script>
+  </body>
 </html>

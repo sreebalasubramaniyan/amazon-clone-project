@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazon</title>
+<html>
+  <head>
+    <title>Orders</title>
+
+    <!-- This code is needed for responsive design to work.
+      (Responsive design = make the website look good on
+      smaller screen sizes like a phone or a tablet). -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <!-- Here are the CSS files for this page. -->
+    <link rel="stylesheet" href="styles/shared/general.css">
     <link rel="stylesheet" href="styles/header.css">
-    <link rel="stylesheet" href="styles/amazon-home-page.css">
-    <link rel="stylesheet" href="styles/general.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles/pages/orders.css">
+  </head>
+  <body>
     <header class="header-part">
         <div class="logo-part">
             <a class="logo-link" href="index.html">
@@ -24,7 +30,7 @@
         </div>
         <div class="right-part">
             <div class="addto-cart-part">
-                <a href="order.html" class="return-link">
+                <a class="return-link">
                     <span class="return-text">Return</span>
                     <span class="order-text">&Orders</span>
                 </a>
@@ -38,13 +44,14 @@
         </div>
     </header>
     
-    <main>
-        <div class="grid"></div>
-    </main>
-    <!--module this is a entry point for all other js files-->
-    <script type="module" src="scripts/amazon.js">
-    </script>
-    
-    
-</body>
+
+    <div class="main">
+      <div class="page-title">Your Orders</div> 
+      <div class="orders-grid">
+        
+      </div>
+    </div>
+    <script type="module" src="scripts/order.js"></script>
+  </body>
 </html>
+<div class="order-container">

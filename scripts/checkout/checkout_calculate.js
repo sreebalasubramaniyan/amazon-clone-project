@@ -1,6 +1,7 @@
 import {Cart,saveCart} from "../../data/cart.js";
-import {deliveryOption,findProduct} from "./checkout_render.js";
+import {findProduct} from "./checkout_render.js";
 import { products } from "../../data/products.js";
+import { deliveryOption } from "../../data/delivery_date.js";
 export function calculatePaymentSummary(){
     let items = 0;
     let total_price = 0;
@@ -28,6 +29,7 @@ export function calculatePaymentSummary(){
     total = total.toFixed(2)
 
     const paymentSummary = document.querySelector(".payment-summary");
+    if(paymentSummary){
     paymentSummary.querySelector(".items-text").innerText = `Items(${items})`;
     paymentSummary.querySelector(".items_rate").innerText = `$${total_price}`
     paymentSummary.querySelector(".ship_rate").innerText = `$${shipping}`
@@ -37,6 +39,7 @@ export function calculatePaymentSummary(){
     console.log(grand)
     if(grand==0){
     paymentSummary.querySelector(".place-order").style.opacity = 0.6;
+    }
     }
 } 
 
