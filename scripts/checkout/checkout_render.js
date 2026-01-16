@@ -124,7 +124,7 @@ function renderOrderSummary(){
     if(order_summary_html===""){
         order_summary_html = `
         <div>Your cart is empty.</div>
-        <a href="amazon.html"><button class="empty-button">view products</button></a>
+        <a href="index.html"><button class="empty-button">view products</button></a>
         `
     }
     order_summary.innerHTML = order_summary_html;
