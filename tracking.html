@@ -22,14 +22,14 @@
     <header class="header-part">
         <div class="logo-part">
             <a class="logo-link" href="index.html">
-                <img class="logo-image"src="images/amazon-logo-white.png">
+                <img class="logo-image" src="images/amazon-logo-white.png">
                 <img class="amazon-mobile-logo" src="images/amazon-mobile-logo-white.png">
             </a>
         </div>
         <div class="search-part">
             <input class="input-box" type="text" placeholder="Search">
             <button class="search-button">
-                <img class="search-button-image"src="images/icons/search-icon.png">
+                <img class="search-button-image" src="images/icons/search-icon.png">
             </button>
         </div>
         <div class="right-part">
@@ -39,17 +39,35 @@
                     <span class="order-text">&Orders</span>
                 </a>
                 <a class="cart-link" href="checkout.html">
-                    <img class="cart-image"src="images/icons/cart-icon.png" alt="">
+                    <img class="cart-image" src="images/icons/cart-icon.png" alt="">
                     <div class="cart-text">Cart</div>
                     <div class="cart-quantity">0</div>
                 </a>
             </div>
-            <img class="hamburger" src="images/icons/hamburger-menu.png">
+            
+            <button class="hamburger">
+                <img src="images/icons/hamburger-menu.png" alt="Menu">
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="overlay"></div>
+        <div class="mobile-menu">
+            <a href="order.html" class="mobile-menu-item">
+                <span style="font-size: 14px;">Returns</span>
+                <span style="font-size: 15px; font-weight: 700; display: block;">&Orders</span>
+            </a>
+            
+            <a href="checkout.html" class="mobile-menu-item mobile-menu-cart">
+                <img src="images/icons/cart-icon.png" alt="Cart">
+                <span class="mobile-menu-cart-text">Cart</span>
+            </a>
         </div>
     </header>
 
     <div class="main">  
     </div>
     <script type="module" src="scripts/track.js"></script>
+    <script src="scripts/header-menu.js"></script>
   </body>
 </html>
