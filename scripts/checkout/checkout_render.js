@@ -21,14 +21,7 @@ function findProduct(id){
             return p
     }
 }
-for(let i=0;i<3;i++){
-    let obj = {
-        productId:products[i].id, 
-        quantity : 1,
-        delivery_type : 1
-    }
-    Cart.push(obj)
-}
+
 console.log(Cart)
 function renderPaymentSummary(){
     let payment_summary_html = `

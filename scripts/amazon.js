@@ -1,6 +1,6 @@
  // import the var Cart from the file product-details and ../ means go out from the folder
 import {products} from '../data/products.js';
-import {Cart} from '../data/cart.js'
+import {Cart, saveCart} from '../data/cart.js'
 const miss = (x)=>{if(x==40 || 50) return 45;
     else return x;
 }
@@ -81,7 +81,7 @@ function addToCart(button){
             added_show.innerHTML = ``;
         },2000);
         added_show.innerHTML = `<img src="https://supersimple.dev/projects/amazon/images/icons/checkmark.png"> Added`;
-
+        saveCart();
 }
 const add_to_cart_buttons = document.querySelectorAll(".js-addto-button");
 add_to_cart_buttons.forEach((button)=>{
