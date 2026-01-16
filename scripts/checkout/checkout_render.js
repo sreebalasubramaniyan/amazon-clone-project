@@ -3,7 +3,17 @@ import {products} from "../../data/products.js";
 const checkout_items = document.querySelector(".checkout-text");
 const order_summary = document.querySelector(".order-summary")
 const payment_summary = document.querySelector(".payment-summary");
+const today = dayjs()
+const day1 = today.add(7,'day').format('dddd, MMMM D');
+const day2 = today.add(3,'day').format('dddd, MMMM D');
+const day3 = today.add(1,'day').format('dddd, MMMM D');
 
+const deliveryOption = [
+    {date:day1,cost:0},
+    {date:day2,cost:4.99},
+    {date:day3,cost:9.99}
+]
+console.log(dayjs())
 function findProduct(id){
     let res;
     for(let p of products){
@@ -14,11 +24,12 @@ function findProduct(id){
 for(let i=0;i<3;i++){
     let obj = {
         productId:products[i].id, 
-        quantity : 1
+        quantity : 1,
+        delivery_type : 1
     }
     Cart.push(obj)
 }
-
+console.log(Cart)
 function renderPaymentSummary(){
     let payment_summary_html = `
                 <div class="ps-title">Order Summary</div>
@@ -52,13 +63,14 @@ function renderPaymentSummary(){
 payment_summary.innerHTML = payment_summary_html;
 }
 renderPaymentSummary()
+
 function renderOrderSummaery(){
     let order_summary_html = ""
     for (let i=0;i<Cart.length;i++){
             let product = findProduct(Cart[i].productId);
             order_summary_html += `
-            <div class="product-summary">
-                    <div class="delivery_date">Delivery date: Friday, January 23</div>
+            <div class="product-summary" id ="${product.id}">
+                    <div class="delivery_date">Delivery date: ${day1}</div>
                     <div class="details-grid">
                         <div class="image-section">
                             <img src="${product.image}" alt="">
@@ -78,24 +90,24 @@ function renderOrderSummaery(){
                         <div class="delivery-options">
                             <div class="title">Choose a delivery option</div>
                             <div class="option">
-                                <input type="radio">
+                                <input type="radio" name="${"opt:"+product.id}" value="1" id=${product.id} checked>
                                 <div class="date_type">
-                                    <div class="date">Friday, January 23</div>
+                                    <div class="date">${day1}</div>
                                     <div class="type">FREE Shipping</div>
                                 </div>
                             </div>
                             <div class="option">
-                                <input type="radio">
+                                <input type="radio" name="${"opt:"+product.id}" value="2" id=${product.id}>
                                 <div class="date_type">
-                                    <div class="date">Friday, January 23</div>
-                                    <div class="type">FREE Shipping</div>
+                                    <div class="date">${day2}</div>
+                                    <div class="type">$4.99 - Shipping</div>
                                 </div>
                             </div>
                             <div class="option">
-                                <input type="radio">
+                                <input type="radio" name="${"opt:"+product.id}" value="3" id=${product.id}>
                                 <div class="date_type">
-                                    <div class="date">Friday, January 23</div>
-                                    <div class="type">FREE Shipping</div>
+                                    <div class="date">${day3}</div>
+                                    <div class="type">$9.99 - Shipping</div>
                                 </div>
                             </div>
                         </div>
@@ -112,3 +124,17 @@ function renderOrderSummaery(){
     order_summary.innerHTML = order_summary_html;
 }
 renderOrderSummaery()
+
+document.querySelector(".order-summary").addEventListener("change",(e)=>{
+    let id = (e.target.id);
+    let value = Number(e.target.value)
+    let found;
+    for(let p of Cart){
+        if(p.productId==id) found = p;
+    }
+    found.delivery_type = value;
+    let date = deliveryOption[Number(e.target.value)-1].date
+    console.log(document.getElementById(`${id}`))
+    document.getElementById(`${id}`).querySelector(".delivery_date").innerText = "Delivery date: "+date;
+    console.log(Cart)
+})

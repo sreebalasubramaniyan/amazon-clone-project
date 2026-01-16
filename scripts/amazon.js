@@ -49,7 +49,6 @@ grid.innerHTML = product_html;
 // cart function
 function addToCart(button){
     const Parent = button.parentElement.parentElement;
-
     let PId = button.dataset.productId
         let found = false;
         let found_obj = null;
@@ -65,7 +64,8 @@ function addToCart(button){
         else{
             Cart.push({
                 productId:PId,
-                quantity : 1
+                quantity : 1,
+                delivery_type : 1
             })
         }
         // find out the quantity
