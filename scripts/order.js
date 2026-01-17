@@ -1,6 +1,6 @@
 import {Cart, saveCart} from "../data/cart.js";
 import { products } from "../data/products.js";
-import { deliveryOption, tdy } from "../data/delivery_date.js";
+import { deliveryOption } from "../data/delivery_date.js";
 
 function generateId() {
   return crypto.randomUUID();
@@ -9,6 +9,13 @@ function generateId() {
 function findProduct(id) {
   for(let p of products) {
     if(id === p.id) return p;
+  }
+}
+
+// Find delivery option by ID
+function findDeliveryOption(deliveryOptionId) {
+  for(let option of deliveryOption) {
+    if(option.id === deliveryOptionId) return option;
   }
 }
 
@@ -22,10 +29,24 @@ function saveOrders(orders) {
   localStorage.setItem('orders', JSON.stringify(orders));
 }
 
+// Calculate delivery date based on delivery type
+function calculateDeliveryDate(deliveryOptionId) {
+  const deliveryOpt = findDeliveryOption(deliveryOptionId);
+  if(!deliveryOpt) return new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  
+  const daysToAdd = deliveryOpt.daysToDeliver;
+  const deliveryDate = new Date();
+  deliveryDate.setDate(deliveryDate.getDate() + daysToAdd);
+  
+  return deliveryDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
 function createOrder(cartItems) {
+  const orderDate = new Date();
   const order = {
     orderId: generateId(),
-    orderDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+    orderDate: orderDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+    orderDateTimestamp: orderDate.getTime(), // Store timestamp for tracking progress
     items: cartItems.map(cartItem => {
       const product = findProduct(cartItem.productId);
       return {
@@ -34,7 +55,8 @@ function createOrder(cartItems) {
         productImage: product.image,
         quantity: cartItem.quantity,
         priceCents: product.priceCents,
-        deliveryDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+        deliveryOptionId: cartItem.deliveryOptionId,
+        deliveryDate: calculateDeliveryDate(cartItem.deliveryOptionId)
       };
     }),
     totalPrice: cartItems.reduce((sum, item) => {

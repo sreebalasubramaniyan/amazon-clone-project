@@ -57,6 +57,8 @@ grid.innerHTML = product_html;
 
 function addToCart(button){
     const Parent = button.parentElement.parentElement;
+    const q = Parent.querySelector(".quantity").firstElementChild.value
+    console.log(q)
     let PId = button.dataset.productId
         let found = false;
         let found_obj = null;
@@ -67,12 +69,12 @@ function addToCart(button){
             }
         })
         if(found){
-            found_obj.quantity += 1;
+            found_obj.quantity += Number(q);
         }
         else{
             Cart.push({
                 productId:PId,
-                quantity : 1,
+                quantity : Number(q),
                 delivery_type : 1
             })
         }
@@ -82,8 +84,8 @@ function addToCart(button){
         const added_show = Parent.querySelector(".added-showing-part");
         setTimeout(() => {
             added_show.innerHTML = ``;
-        },2000);
-        added_show.innerHTML = `<img src="https://supersimple.dev/projects/amazon/images/icons/checkmark.png"> Added`;
+        },1000);
+        added_show.innerHTML = `<img src="images/icons/checkmark.png"> Added`;
         saveCart();
 }
 
