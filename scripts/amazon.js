@@ -23,7 +23,7 @@ for(let product of products){
                 ${product.name}
             </div>
             <div class="rating-section">
-                <img src="https://supersimple.dev/projects/amazon/images/ratings/rating-${miss(product.rating.stars*10)}.png" alt="" class="rating-image">
+                <img src="images/ratings/rating-${(product.rating.stars*10)}.png" alt="" class="rating-image">
                 <div class="rating-number">${product.rating.count}</div>
             </div>
             <div class="price">$${(product.priceCents/100).toFixed(2)}</div>

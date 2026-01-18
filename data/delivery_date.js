@@ -25,3 +25,22 @@ export const deliveryOption = [
     {date:day2,cost:4.99},
     {date:day3,cost:9.99}
 ]
+
+export function daysBetween(inputDateStr) {
+  const today = new Date();
+  
+  // Add current year because input has no year
+  const currentYear = today.getFullYear();
+  const fullDateStr = `${inputDateStr}, ${currentYear}`;
+
+  const inputDate = new Date(fullDateStr);
+
+  // Remove time part (important)
+  today.setHours(0, 0, 0, 0);
+  inputDate.setHours(0, 0, 0, 0);
+
+  const diffMs = inputDate - today;
+  const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+  return diffDays;
+}

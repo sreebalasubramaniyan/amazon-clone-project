@@ -1,113 +1,75 @@
-import { getOrders } from "./order.js";
+import { Orders,saveOrders } from "../data/orders_data.js";
+import { daysBetween } from "../data/delivery_date.js";
 
-function getOrderIdFromURL() {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('orderId');
+function findProductFromOrders(Orderid){
+  for (let p of Orders) if (p.orderId === Orderid) return p;
 }
-
-function findOrderById(orderId) {
-  const orders = getOrders();
-  return orders.find(order => order.orderId === orderId);
+function findItemFromProducts(productId,order){
+  for(let p of order.products_ordered) if (p.productId == productId) return p;
 }
+const params = new URLSearchParams(window.location.search);
+const arr = params.get("id").split(" ");
+console.log(arr[0]);
+const order = findProductFromOrders(arr[0]);
+const product = (findItemFromProducts(arr[1],order));
+renderTrack(product);
 
-function calculateProgress(orderDate, deliveryDate) {
-  const stages = ['Preparing', 'Shipped', 'Delivered'];
-  
-  const order = new Date(orderDate);
-  const delivery = new Date(deliveryDate);
-  const today = new Date();
-  
-  order.setHours(0, 0, 0, 0);
-  delivery.setHours(0, 0, 0, 0);
-  today.setHours(0, 0, 0, 0);
-  
-  const totalDays = Math.ceil((delivery - order) / (1000 * 60 * 60 * 24));
-  const daysPassed = Math.ceil((today - order) / (1000 * 60 * 60 * 24));
-  
-  let currentStage = 0;
-  let percentage = 0;
-  
-  if (daysPassed < 1) {
-    currentStage = 0;
-    percentage = 25;
-  } else if (daysPassed < totalDays - 1) {
-    currentStage = 1;
-    percentage = 50;
-  } else if (daysPassed < totalDays) {
-    currentStage = 1;
-    percentage = 75;
-  } else {
-    currentStage = 2;
-    percentage = 100;
-  }
-  
-  return { currentStage, percentage, daysPassed, totalDays };
-}
-
-function generateTrackingHTML() {
-  const orderId = getOrderIdFromURL();
-  const order = findOrderById(orderId);
-
-  if (!order) {
-    return `
-      <div class="order-tracking">
-        <a class="back-to-orders-link link-primary" href="orders.html">
+function renderTrack(product){
+  console.log(product);
+  const html = `
+        <div class="order-tracking">
+        <a class="back-to-orders-link link-primary" href="order.html">
           View all orders
         </a>
-        <div class="product-info">Order not found</div>
-      </div>
-    `;
-  }
 
-  const firstItem = order.items[0];
-  const progress = calculateProgress(order.orderDate, firstItem.deliveryDate);
-  const stages = ['Preparing', 'Shipped', 'Delivered'];
+        <div class="delivery-date">
+          Arriving on ${product.arrivingDate}
+        </div>
 
-  let trackingHTML = `
-    <div class="order-tracking">
-      <a class="back-to-orders-link link-primary" href="orders.html">
-        View all orders
-      </a>
+        <div class="product-info">
+          ${product.productName}
+        </div>
 
-      <div class="delivery-date">
-        Arriving on ${firstItem.deliveryDate}
-      </div>
+        <div class="product-info">
+          Quantity: ${product.productQuantity}
+        </div>
 
-      <div class="product-info">
-        ${firstItem.productName}
-      </div>
+        <img class="product-image" src="${product.productImage}">
 
-      <div class="product-info">
-        Quantity: ${firstItem.quantity}
-      </div>
-
-      <img class="product-image" src="${firstItem.productImage}" alt="${firstItem.productName}">
-
-      <div class="progress-labels-container">
-        ${stages.map((stage, index) => `
-          <div class="progress-label ${index === progress.currentStage ? 'current-status' : ''}">
-            ${stage}
+        <div class="progress-labels-container">
+          <div class="progress-label">
+            Preparing
           </div>
-        `).join('')}
-      </div>
+          <div class="progress-label">
+            Shipped
+          </div>
+          <div class="progress-label">
+            Delivered
+          </div>
+        </div>
 
-      <div class="progress-bar-container">
-        <div class="progress-bar" style="width: ${progress.percentage}%"></div>
+        <div class="progress-bar-container">
+          <div class="progress-bar"></div>
+        </div>
       </div>
-      
-      <div class="tracking-info">
-        <p>Days since order: ${progress.daysPassed} / ${progress.totalDays}</p>
-        <p>Status: ${stages[progress.currentStage]}</p>
-      </div>
-    </div>
-  `;
-
-  return trackingHTML;
+  `
+  document.querySelector(".main").innerHTML = html;
+  let rem_days = (daysBetween(product.arrivingDate));
+  let status;
+  console.log(rem_days)
+  let progress = document.querySelector(".progress-bar")
+  let container = document.querySelector(".progress-labels-container");
+    if(rem_days < 0) {
+      progress.style.cssText += "width:100%";
+      container.lastElementChild.classList.add("current-status")
+    }
+    else if(rem_days>=1 && rem_days <=3){
+      progress.style.cssText += "width:75%";
+      container.firstElementChild.nextElementSibling.classList.add("current-status")
+    }
+    else {
+      progress.style.cssText += "width:10%";
+      container.firstElementChild.classList.add("current-status")
+    }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const mainContainer = document.querySelector('.main');
-  if(mainContainer) {
-    mainContainer.innerHTML = generateTrackingHTML();
-  }
-});
