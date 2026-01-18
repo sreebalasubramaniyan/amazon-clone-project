@@ -140,6 +140,7 @@ function changeDeliveryDate(e){
     console.log(document.getElementById(`${id}`))
     document.getElementById(`${id}`).querySelector(".delivery_date").innerText = "Delivery date: "+date;
     console.log(Cart)
+    saveCart();
 }
 document.querySelector(".order-summary").addEventListener("change",(e)=>{
     changeDeliveryDate(e);
